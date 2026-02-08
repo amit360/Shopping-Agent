@@ -14,14 +14,6 @@
   animation: fade-in 0.4s ease-out forwards;
 }
 
-@keyframes scale-in {
-  from { opacity: 0; transform: scale(0.92); }
-  to { opacity: 1; transform: scale(1); }
-}
-.animate-scale-in {
-  animation: scale-in 0.3s ease-out forwards;
-}
-
 @keyframes pulse-dot {
   0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
   40% { transform: scale(1); opacity: 1; }
@@ -42,7 +34,15 @@
   animation: check-pop 0.4s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
-/* Snap scroll for carousels */
+@keyframes cta-load {
+  0% { background-color: #d1d5db; }
+  100% { background-color: #000000; }
+}
+.animate-cta-load {
+  animation: cta-load 0.6s ease-out 0.3s forwards;
+  background-color: #d1d5db;
+}
+
 .snap-x-mandatory {
   scroll-snap-type: x mandatory;
 }
