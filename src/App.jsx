@@ -232,7 +232,7 @@ function CheckoutSheet({ item, onClose, onComplete }) {
   return (
     <div className="absolute inset-0 z-[60] flex flex-col justify-end">
       <div className="absolute inset-0 bg-black/60" onClick={step === 'done' ? undefined : onClose} />
-      <div className="relative bg-white rounded-t-3xl animate-slide-up overflow-hidden" style={{ maxHeight: '60%' }}>
+      <div className="relative bg-white rounded-t-3xl animate-slide-up overflow-hidden" style={{ maxHeight: '80%' }}>
         <div className="flex justify-center pt-3 pb-2"><div className="w-10 h-1 bg-gray-300 rounded-full" /></div>
 
         {step === 'review' && (
@@ -250,6 +250,31 @@ function CheckoutSheet({ item, onClose, onComplete }) {
                 <p className="text-sm text-gray-500">Qty: {item.qty}</p>
               </div>
               <p className="text-lg font-bold text-gray-900">${subtotal}</p>
+            </div>
+
+            {/* Shipping info - pre-populated */}
+            <div className="mb-5 p-4 bg-gray-50 rounded-2xl">
+              <p className="text-sm font-semibold text-gray-900 mb-3">Shipping Information</p>
+              <div className="space-y-2.5">
+                <div>
+                  <p className="text-[11px] text-gray-400 uppercase tracking-wide mb-0.5">Name</p>
+                  <p className="text-[13px] text-gray-800 font-medium">Alex Johnson</p>
+                </div>
+                <div>
+                  <p className="text-[11px] text-gray-400 uppercase tracking-wide mb-0.5">Address</p>
+                  <p className="text-[13px] text-gray-800 font-medium">742 Evergreen Terrace, San Francisco, CA 94102</p>
+                </div>
+                <div className="flex gap-6">
+                  <div>
+                    <p className="text-[11px] text-gray-400 uppercase tracking-wide mb-0.5">Phone</p>
+                    <p className="text-[13px] text-gray-800 font-medium">(415) 555-0142</p>
+                  </div>
+                  <div>
+                    <p className="text-[11px] text-gray-400 uppercase tracking-wide mb-0.5">Email</p>
+                    <p className="text-[13px] text-gray-800 font-medium">alex.j@email.com</p>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Order details */}
@@ -318,7 +343,7 @@ function ShoeDetail({ shoe, onBack, onCheckout }) {
   return (
     <div className="flex flex-col h-full bg-white">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
+      <div className="flex items-center justify-between px-5 py-3 border-b border-gray-100">
         <button onClick={onBack} className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-gray-100 -ml-1">
           <ArrowLeft size={22} className="text-gray-700" />
         </button>
@@ -330,27 +355,27 @@ function ShoeDetail({ shoe, onBack, onCheckout }) {
 
       <div className="flex-1 overflow-y-auto no-scrollbar">
         {/* Hero image */}
-        <div className="bg-gradient-to-b from-gray-50 to-gray-100 py-12 flex items-center justify-center relative">
-          <ShoeByType type={shoe.type} color={shoe.color} sole={shoe.sole} className="w-56 h-auto drop-shadow-xl" />
+        <div className="bg-gradient-to-b from-gray-50 to-gray-100 py-10 flex items-center justify-center relative mx-4 mt-4 rounded-2xl">
+          <ShoeByType type={shoe.type} color={shoe.color} sole={shoe.sole} className="w-52 h-auto drop-shadow-xl" />
           {shoe.rating >= 4.8 && (
-            <span className="absolute top-4 left-4 bg-yellow-400 text-[10px] font-bold text-yellow-900 px-2.5 py-1 rounded-full">BESTSELLER</span>
+            <span className="absolute top-3 left-3 bg-yellow-400 text-[10px] font-bold text-yellow-900 px-2.5 py-1 rounded-full">BESTSELLER</span>
           )}
         </div>
 
         {/* Product info */}
-        <div className="px-5 pt-5 pb-4 space-y-5">
+        <div className="px-5 pt-5 pb-3 space-y-4">
           {/* Title + price row */}
           <div>
             <div className="flex items-start justify-between gap-3">
               <div>
                 <h3 className="text-[22px] font-bold text-gray-900 leading-tight">{shoe.name}</h3>
-                <p className="text-[15px] text-gray-500 mt-1">{shoe.tagline}</p>
+                <p className="text-[14px] text-gray-500 mt-0.5">{shoe.tagline}</p>
               </div>
               <div className="text-right flex-shrink-0">
                 <p className="text-[22px] font-bold text-gray-900">${shoe.price}</p>
               </div>
             </div>
-            <div className="mt-2.5"><StarRating rating={shoe.rating} reviews={shoe.reviews} /></div>
+            <div className="mt-2"><StarRating rating={shoe.rating} reviews={shoe.reviews} /></div>
           </div>
 
           {/* Features */}
@@ -360,7 +385,6 @@ function ShoeDetail({ shoe, onBack, onCheckout }) {
             ))}
           </div>
 
-          {/* Divider */}
           <div className="h-px bg-gray-100" />
 
           {/* Description */}
@@ -368,7 +392,7 @@ function ShoeDetail({ shoe, onBack, onCheckout }) {
 
           {/* Color */}
           <div>
-            <p className="text-sm font-semibold text-gray-900 mb-3">Color — <span className="font-normal text-gray-500">{selectedColor}</span></p>
+            <p className="text-sm font-semibold text-gray-900 mb-2.5">Color — <span className="font-normal text-gray-500">{selectedColor}</span></p>
             <div className="flex gap-2">
               {shoe.colors.map((c) => (
                 <button key={c} onClick={() => setSelectedColor(c)}
@@ -381,7 +405,7 @@ function ShoeDetail({ shoe, onBack, onCheckout }) {
 
           {/* Size */}
           <div>
-            <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center justify-between mb-2.5">
               <p className="text-sm font-semibold text-gray-900">Size</p>
               <button className="text-xs text-gray-500 underline">Size Guide</button>
             </div>
@@ -397,7 +421,7 @@ function ShoeDetail({ shoe, onBack, onCheckout }) {
 
           {/* Quantity */}
           <div>
-            <p className="text-sm font-semibold text-gray-900 mb-3">Quantity</p>
+            <p className="text-sm font-semibold text-gray-900 mb-2.5">Quantity</p>
             <div className="flex items-center border border-gray-200 rounded-xl w-fit overflow-hidden">
               <button onClick={() => setQty(Math.max(1, qty - 1))} className="w-11 h-11 flex items-center justify-center hover:bg-gray-50 transition-colors">
                 <Minus size={16} className="text-gray-600" />
@@ -408,24 +432,18 @@ function ShoeDetail({ shoe, onBack, onCheckout }) {
               </button>
             </div>
           </div>
-
-          {/* Trust info */}
-          <div className="flex gap-4 py-3 border-t border-gray-100">
-            <div className="flex items-center gap-1.5 text-xs text-gray-500"><Truck size={14} /> Free Shipping</div>
-            <div className="flex items-center gap-1.5 text-xs text-gray-500"><RotateCcw size={14} /> 30-Day Returns</div>
-          </div>
         </div>
       </div>
 
-      {/* Bottom CTA */}
-      <div className="px-5 py-4 border-t border-gray-100 bg-white">
+      {/* Bottom CTA - slightly higher with more padding */}
+      <div className="px-5 py-3 border-t border-gray-100 bg-white">
         <button onClick={() => selectedSize && onCheckout({ ...shoe, size: selectedSize, selectedColor, qty })}
-          className={`w-full py-4 rounded-2xl font-semibold text-[16px] flex items-center justify-center gap-2.5 transition-all ${
+          className={`w-full py-3.5 rounded-2xl font-semibold text-[16px] flex items-center justify-center gap-2.5 transition-all ${
             selectedSize ? 'bg-black text-white hover:bg-gray-800 shadow-xl shadow-black/15 active:scale-[0.98]' : 'bg-gray-200 text-gray-400 cursor-not-allowed'
           }`}>
           <ShoppingCart size={20} /> Add to Cart — ${shoe.price * qty}
         </button>
-        {!selectedSize && <p className="text-xs text-center text-gray-400 mt-2">Please select a size</p>}
+        {!selectedSize && <p className="text-xs text-center text-gray-400 mt-1.5">Please select a size</p>}
       </div>
     </div>
   )
@@ -548,18 +566,18 @@ function ChatModal({ isOpen, onClose }) {
         </div>
 
         {/* Chat Body */}
-        <div className="flex-1 overflow-y-auto px-5 pt-5 pb-4 space-y-4 no-scrollbar bg-[#fafafa]">
+        <div className="flex-1 overflow-y-auto px-4 pt-5 pb-4 space-y-5 no-scrollbar bg-[#fafafa]">
           {messages.map((msg, i) => {
             if (msg.type === 'trending') {
               return (
                 <div key={i} className="animate-fade-in" style={{ animationDelay: '0.15s', opacity: 0 }}>
-                  <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-2.5 ml-9">Popular right now</p>
-                  <div className="flex gap-2.5 overflow-x-auto no-scrollbar pb-1 ml-9 snap-x-mandatory">
+                  <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-3 ml-10">Popular right now</p>
+                  <div className="flex gap-2.5 overflow-x-auto no-scrollbar pb-1 ml-10 snap-x-mandatory">
                     {ALL_SHOES.slice(0, 5).map((shoe) => (
                       <button key={shoe.id} onClick={() => setSelectedShoe(shoe)}
-                        className="min-w-[120px] bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm flex-shrink-0 text-left hover:shadow-md transition-all snap-start">
-                        <div className="bg-gradient-to-b from-white to-gray-50 h-[72px] flex items-center justify-center">
-                          <ShoeByType type={shoe.type} color={shoe.color} sole={shoe.sole} className="w-[88px] h-auto" />
+                        className="min-w-[115px] bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm flex-shrink-0 text-left hover:shadow-md transition-all snap-start">
+                        <div className="bg-gradient-to-b from-white to-gray-50 h-[68px] flex items-center justify-center">
+                          <ShoeByType type={shoe.type} color={shoe.color} sole={shoe.sole} className="w-[84px] h-auto" />
                         </div>
                         <div className="px-2.5 pb-2.5 pt-1">
                           <p className="text-[11px] font-semibold text-gray-900 truncate">{shoe.name}</p>
@@ -574,13 +592,13 @@ function ChatModal({ isOpen, onClose }) {
 
             if (msg.type === 'shoe-carousel') {
               return (
-                <div key={i} className="animate-fade-in ml-9" style={{ opacity: 0 }}>
+                <div key={i} className="animate-fade-in ml-10" style={{ opacity: 0 }}>
                   <div className="flex gap-3 overflow-x-auto no-scrollbar pb-2 snap-x-mandatory">
                     {msg.shoes.map((shoe) => (
                       <button key={shoe.id} onClick={() => setSelectedShoe(shoe)}
-                        className="min-w-[155px] bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm flex-shrink-0 text-left hover:shadow-lg transition-all snap-start group">
-                        <div className="bg-gradient-to-b from-white to-gray-50 h-[100px] flex items-center justify-center p-3 relative">
-                          <ShoeByType type={shoe.type} color={shoe.color} sole={shoe.sole} className="w-[120px] h-auto group-hover:scale-105 transition-transform" />
+                        className="min-w-[150px] bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm flex-shrink-0 text-left hover:shadow-lg transition-all snap-start group">
+                        <div className="bg-gradient-to-b from-white to-gray-50 h-[96px] flex items-center justify-center p-3 relative">
+                          <ShoeByType type={shoe.type} color={shoe.color} sole={shoe.sole} className="w-[115px] h-auto group-hover:scale-105 transition-transform" />
                           {shoe.rating >= 4.8 && (
                             <span className="absolute top-2 left-2 bg-yellow-400/90 text-[8px] font-bold text-yellow-900 px-1.5 py-0.5 rounded-full">TOP PICK</span>
                           )}
@@ -602,15 +620,15 @@ function ChatModal({ isOpen, onClose }) {
 
             return msg.from === 'bot' ? (
               <div key={i} className="flex items-end gap-2.5 animate-fade-in" style={{ opacity: 0 }}>
-                <AllbirdsLogo size={26} className="flex-shrink-0 mb-0.5" />
+                <AllbirdsLogo size={28} className="flex-shrink-0 mb-0.5" />
                 <div className="max-w-[78%] bg-white rounded-2xl rounded-bl-md px-4 py-3 shadow-sm border border-gray-100">
-                  <p className="text-[13.5px] text-gray-800 leading-relaxed">{msg.text}</p>
+                  <p className="text-[14px] text-gray-800 leading-relaxed">{msg.text}</p>
                 </div>
               </div>
             ) : (
               <div key={i} className="flex justify-end animate-fade-in" style={{ opacity: 0 }}>
                 <div className="max-w-[78%] bg-gray-900 text-white rounded-2xl rounded-br-md px-4 py-3">
-                  <p className="text-[13.5px] leading-relaxed">{msg.text}</p>
+                  <p className="text-[14px] leading-relaxed">{msg.text}</p>
                 </div>
               </div>
             )
@@ -618,7 +636,7 @@ function ChatModal({ isOpen, onClose }) {
 
           {isTyping && (
             <div className="flex items-end gap-2.5">
-              <AllbirdsLogo size={26} className="flex-shrink-0 mb-0.5" />
+              <AllbirdsLogo size={28} className="flex-shrink-0 mb-0.5" />
               <div className="bg-white rounded-2xl rounded-bl-md px-4 py-3.5 shadow-sm border border-gray-100">
                 <div className="flex gap-1.5">
                   <span className="w-2 h-2 bg-gray-400 rounded-full typing-dot" />
@@ -629,18 +647,18 @@ function ChatModal({ isOpen, onClose }) {
             </div>
           )}
 
-          {/* Chips with color and spacing */}
+          {/* Chips */}
           {chips.length > 0 && (
-            <div className="flex gap-2 flex-wrap ml-9 pt-2 animate-fade-in" style={{ opacity: 0 }}>
+            <div className="flex gap-2.5 flex-wrap ml-10 pt-1 animate-fade-in" style={{ opacity: 0 }}>
               {chips.map((chip, idx) => {
-                const chipColors = [
+                const chipStyles = [
                   'bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-100',
                   'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100',
                   'bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100',
                 ]
                 return (
                   <button key={chip} onClick={() => handleChipClick(chip)}
-                    className={`px-4 py-2.5 border rounded-full text-[13px] font-medium active:scale-95 transition-all shadow-sm ${chipColors[idx]}`}>
+                    className={`px-4 py-2.5 border rounded-full text-[13px] font-medium active:scale-95 transition-all shadow-sm ${chipStyles[idx]}`}>
                     {chip}
                   </button>
                 )
@@ -652,7 +670,7 @@ function ChatModal({ isOpen, onClose }) {
         </div>
 
         {/* Input */}
-        <div className="border-t border-gray-100 px-5 py-3.5 flex items-center gap-2.5 bg-white">
+        <div className="border-t border-gray-100 px-4 py-3 flex items-center gap-2.5 bg-white">
           <input type="text" placeholder="Type a message..." className="flex-1 bg-gray-100 rounded-full px-4 py-3 text-[14px] text-gray-700 outline-none placeholder-gray-400" disabled />
           <button className="w-11 h-11 bg-black rounded-full flex items-center justify-center flex-shrink-0 hover:bg-gray-800 transition-colors">
             <Send size={18} className="text-white" />
@@ -665,20 +683,32 @@ function ChatModal({ isOpen, onClose }) {
   )
 }
 
-// ─── YouTube Feed Videos ───────────────────────────────────────────────────────
+// ─── YouTube Feed Videos with real thumbnail images ─────────────────────────
 
 const FEED_VIDEOS = [
   {
-    title: 'Best Travel Shoes 2026 — Allbirds vs Nike vs On Cloud',
-    channel: 'PackHacker', views: '284K views', time: '2 weeks ago', duration: '12:34',
-    bgColor: 'bg-gradient-to-br from-blue-400 via-cyan-300 to-teal-400',
-    icon: '🏃',
+    title: 'I made kitchen tiles from trash // DIY Plywood Tiles',
+    channel: 'Laura Kampf',
+    channelInitial: 'LK',
+    channelColor: 'bg-purple-600',
+    views: '12K views',
+    time: '2 days ago',
+    duration: '15:55',
+    thumbnail: 'https://i.ytimg.com/vi/RwKEbYhHbak/hqdefault.jpg',
+    bgColor: 'bg-gradient-to-br from-teal-500 via-cyan-400 to-teal-600',
+    overlayText: 'LAURA\nKAMPF\nKOLN',
   },
   {
-    title: "I Wore Allbirds for 365 Days — Here's What Happened",
-    channel: 'Chase Reeves', views: '1.2M views', time: '3 months ago', duration: '18:22',
-    bgColor: 'bg-gradient-to-br from-orange-300 via-rose-300 to-pink-400',
-    icon: '👟',
+    title: 'More Accents, World Cup & Calling a Fan - Joanna Responds',
+    channel: 'Joanna Hausmann',
+    channelInitial: 'JH',
+    channelColor: 'bg-yellow-500',
+    views: '5k views',
+    time: '1 day ago',
+    duration: '9:07',
+    thumbnail: 'https://i.ytimg.com/vi/GYJkkr4Chbg/hqdefault.jpg',
+    bgColor: 'bg-gradient-to-br from-green-400 via-emerald-300 to-teal-400',
+    overlayText: 'JOANNA\nRESPONDS!',
   },
 ]
 
@@ -696,30 +726,32 @@ function App() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-slate-900">
-      <div className="relative w-[390px] h-[844px] bg-white shadow-2xl overflow-hidden flex flex-col">
+      <div className="relative w-[390px] h-[844px] bg-white shadow-2xl overflow-hidden flex flex-col" style={{ fontFamily: "'Roboto', system-ui, -apple-system, sans-serif" }}>
 
-        {/* YouTube Top Nav */}
-        <div className="flex items-center justify-between px-3.5 py-2 bg-white border-b border-gray-50">
-          <div className="flex items-center gap-1">
-            {/* Proper YouTube logo */}
-            <svg width="90" height="20" viewBox="0 0 90 20" className="flex-shrink-0">
-              <rect x="0" y="0" width="28" height="20" rx="5" fill="#FF0000"/>
-              <polygon points="11,5 11,15 20,10" fill="white"/>
-              <text x="32" y="15" fontFamily="system-ui, -apple-system, sans-serif" fontWeight="800" fontSize="16" fill="#1a1a1a" letterSpacing="-0.5">YouTube</text>
+        {/* YouTube Top Nav - matching real YouTube */}
+        <div className="flex items-center justify-between px-3.5 py-2.5 bg-white">
+          <div className="flex items-center gap-0">
+            {/* YouTube logo - proper red play button + text */}
+            <svg width="100" height="22" viewBox="0 0 100 22" className="flex-shrink-0">
+              {/* Red rounded rectangle with play button */}
+              <rect x="0" y="1" width="30" height="20" rx="6" ry="6" fill="#FF0000"/>
+              <polygon points="12,6 12,16 22,11" fill="white"/>
+              {/* YouTube text */}
+              <text x="34" y="17" fontFamily="'Roboto', system-ui, -apple-system, sans-serif" fontWeight="700" fontSize="17" fill="#0f0f0f" letterSpacing="-0.8">YouTube</text>
             </svg>
           </div>
           <div className="flex items-center gap-5">
-            <Cast size={21} className="text-gray-700" />
+            <Cast size={22} className="text-[#0f0f0f]" />
             <div className="relative">
-              <Bell size={21} className="text-gray-700" />
-              <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-red-500 rounded-full text-white text-[8px] flex items-center justify-center font-bold">3</span>
+              <Bell size={22} className="text-[#0f0f0f]" />
+              <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-red-600 rounded-full text-white text-[9px] flex items-center justify-center font-bold">3</span>
             </div>
-            <Search size={21} className="text-gray-700" />
+            <Search size={22} className="text-[#0f0f0f]" />
           </div>
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 overflow-y-auto no-scrollbar bg-[#f9f9f9]">
+        <div className="flex-1 overflow-y-auto no-scrollbar bg-white">
 
           {/* Hero Ad */}
           <div className="relative overflow-hidden bg-white" style={{ aspectRatio: '3/3.2' }}>
@@ -755,30 +787,30 @@ function App() {
             ))}
           </div>
 
-          {/* Ad Metadata */}
-          <div className="px-4 pb-2.5 bg-white">
+          {/* Ad Metadata - YouTube style */}
+          <div className="px-3 pb-2.5 bg-white">
             <div className="flex items-start gap-3">
               <span className="text-sm font-serif italic text-gray-800 mt-0.5 flex-shrink-0">allbirds</span>
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between gap-2">
                   <div>
-                    <h3 className="text-[15px] font-semibold text-gray-900 leading-snug">The Perfect Pair For Anywhere</h3>
-                    <p className="text-[13px] text-gray-500 mt-0.5 leading-snug">Easy to pack, breezy to clean, our shoes are ready for whatever.</p>
-                    <p className="text-xs text-gray-400 mt-1"><span className="font-semibold text-gray-500">Sponsored</span> · Allbirds</p>
+                    <h3 className="yt-title" style={{ fontWeight: 600 }}>The Perfect Pair For Anywhere</h3>
+                    <p className="yt-meta mt-0.5">Easy to pack, breezy to clean, our shoes are ready for whatever.</p>
+                    <p className="text-xs text-[#606060] mt-1"><span className="font-semibold">Sponsored</span> · Allbirds</p>
                   </div>
-                  <MoreVertical size={18} className="text-gray-400 flex-shrink-0 mt-0.5" />
+                  <MoreVertical size={18} className="text-[#606060] flex-shrink-0 mt-0.5" />
                 </div>
               </div>
             </div>
           </div>
 
-          {/* CTAs — gray on load, black animates in */}
-          <div className="flex gap-2.5 px-4 pb-4 bg-white">
-            <button className="flex-1 bg-white text-gray-900 font-bold text-[15px] py-3 rounded-full border border-gray-300 hover:bg-gray-50 transition-colors">
+          {/* CTAs */}
+          <div className="flex gap-2.5 px-3 pb-4 bg-white">
+            <button className="flex-1 bg-white text-[#0f0f0f] font-medium text-[14px] py-2.5 rounded-full border border-[#ccc] hover:bg-gray-50 transition-colors" style={{ fontFamily: "'Roboto', system-ui, sans-serif" }}>
               Shop now
             </button>
             <button onClick={() => setChatOpen(true)}
-              className="flex-[1.3] text-white font-bold text-[15px] py-3 rounded-full animate-cta-load hover:opacity-90 transition-opacity shadow-lg shadow-black/10">
+              className="flex-[1.3] text-white font-medium text-[14px] py-2.5 rounded-full animate-cta-load hover:opacity-90 transition-opacity shadow-lg shadow-black/10" style={{ fontFamily: "'Roboto', system-ui, sans-serif" }}>
               Chat with AllBirds
             </button>
           </div>
@@ -786,38 +818,42 @@ function App() {
           {/* Feed Separator */}
           <div className="h-2 bg-[#f2f2f2]" />
 
-          {/* YouTube Video Feed */}
+          {/* YouTube Video Feed - matching real YouTube layout */}
           {FEED_VIDEOS.map((vid, i) => (
-            <div key={i} className="bg-white mb-2">
+            <div key={i} className="bg-white mb-0">
+              {/* Thumbnail with overlay text */}
               <div className={`w-full ${vid.bgColor} relative`} style={{ aspectRatio: '16/9' }}>
+                {/* Colored background with text overlay */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-5xl">{vid.icon}</span>
-                </div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-14 h-14 bg-black/60 rounded-full flex items-center justify-center backdrop-blur-sm">
-                    <div className="w-0 h-0 border-t-[10px] border-t-transparent border-b-[10px] border-b-transparent border-l-[16px] border-l-white ml-1" />
+                  <div className="text-center">
+                    {vid.overlayText.split('\n').map((line, li) => (
+                      <p key={li} className="text-white font-black text-[28px] leading-tight tracking-wide" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.3)' }}>{line}</p>
+                    ))}
                   </div>
                 </div>
-                <span className="absolute bottom-2 right-2 bg-black/80 text-white text-[11px] font-medium px-1.5 py-0.5 rounded">{vid.duration}</span>
+                <span className="absolute bottom-2 right-2 bg-black/80 text-white text-[12px] font-medium px-1.5 py-0.5 rounded">{vid.duration}</span>
               </div>
-              <div className="flex gap-3 p-3">
-                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-gray-300 to-gray-400 flex-shrink-0 mt-0.5" />
-                <div className="flex-1 min-w-0">
-                  <p className="text-[14px] font-medium text-gray-900 leading-snug line-clamp-2">{vid.title}</p>
-                  <p className="text-xs text-gray-500 mt-1">{vid.channel} · {vid.views} · {vid.time}</p>
+              {/* Video info - YouTube style */}
+              <div className="flex gap-3 px-3 pt-3 pb-3">
+                <div className={`w-9 h-9 rounded-full ${vid.channelColor} flex-shrink-0 flex items-center justify-center`}>
+                  <span className="text-white text-[11px] font-bold">{vid.channelInitial}</span>
                 </div>
-                <MoreVertical size={18} className="text-gray-400 flex-shrink-0 mt-1" />
+                <div className="flex-1 min-w-0 pr-6">
+                  <p className="yt-title">{vid.title}</p>
+                  <p className="yt-meta mt-1">{vid.channel} · {vid.views} · {vid.time}</p>
+                </div>
+                <MoreVertical size={20} className="text-[#606060] flex-shrink-0 mt-0.5" />
               </div>
             </div>
           ))}
           <div className="h-2" />
         </div>
 
-        {/* Bottom Nav */}
-        <div className="flex items-center justify-around py-1.5 pb-4 bg-[#212121] border-t border-white/5">
+        {/* Bottom Nav - white background like YouTube */}
+        <div className="flex items-center justify-around py-1.5 pb-4 bg-white border-t border-gray-200">
           <NavItem icon={<Home size={22} />} label="Home" active />
           <NavItem icon={<ShortsIcon size={22} />} label="Shorts" />
-          <div className="flex flex-col items-center"><PlusCircle size={30} className="text-white" /></div>
+          <div className="flex flex-col items-center"><PlusCircle size={34} className="text-[#0f0f0f]" /></div>
           <NavItem icon={<PlaySquare size={22} />} label="Subscriptions" />
           <NavItem icon={<User size={22} />} label="You" />
         </div>
@@ -831,8 +867,8 @@ function App() {
 function NavItem({ icon, label, active = false }) {
   return (
     <button className="flex flex-col items-center gap-0.5 min-w-[48px]">
-      <span className={active ? 'text-white' : 'text-gray-400'}>{icon}</span>
-      <span className={`text-[10px] ${active ? 'text-white font-medium' : 'text-gray-400'}`}>{label}</span>
+      <span className={active ? 'text-[#0f0f0f]' : 'text-[#606060]'}>{icon}</span>
+      <span className={`text-[10px] ${active ? 'text-[#0f0f0f] font-medium' : 'text-[#606060]'}`} style={{ fontFamily: "'Roboto', system-ui, sans-serif" }}>{label}</span>
     </button>
   )
 }
